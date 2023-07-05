@@ -7,6 +7,7 @@
 #include <QKeyEvent>
 #include <QObject>
 
+#include "bulletitem.h"
 #include "tankitem.h"
 
 class gameScene : public QGraphicsScene
@@ -16,12 +17,14 @@ class gameScene : public QGraphicsScene
 
 public:
     void initItem();
+    void shoot();
+    bulletItem* initBullet();
     explicit gameScene(QObject *parent = nullptr);
     ~gameScene();
 
 public slots:
     void moveTank();
-
+    void moveBullet(bulletItem* bullet,qreal radians);
 protected:
     void keyPressEvent(QKeyEvent *event) override;
     void keyReleaseEvent(QKeyEvent *event) override;
@@ -29,14 +32,19 @@ protected:
 private:
     bool isKeyPressed(int key);
     QTimer *timer;
+
+
     bool movingUp;
     bool movingDown;
+    bool leftRotate;
+    bool rightRotate;
 
     void startMoving();
     void stopMoving();
 
 private :
     tankItem *tank;
+
 };
 
 #endif // GAMESCENE_H
