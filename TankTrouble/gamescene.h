@@ -6,6 +6,7 @@
 #include <QtGui>
 #include <QKeyEvent>
 #include <QObject>
+#include <QMessageBox>
 
 #include "bulletitem.h"
 #include "tankitem.h"
@@ -32,6 +33,10 @@ private:
     void initItem();
     void initStatus();
     void shoot(int x);
+    void startMoving();
+    void stopMoving();
+    void checkBulletTankCollision(bulletItem* bullet);
+
     bulletItem* initBullet(int x);
 
     bool isKeyPressed(int key);
@@ -51,8 +56,7 @@ private:
     bool leftRotate_2;
     bool rightRotate_2;
 
-    void startMoving();
-    void stopMoving();
+
 
 private :
     int num=0;

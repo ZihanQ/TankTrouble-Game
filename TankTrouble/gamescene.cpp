@@ -21,15 +21,16 @@ void gameScene::startMoving() {
 
 }
 
-void gameScene::stopMoving() {
+void gameScene::stopMoving()
+{
     if(tankStatus_1 == false){
-        timer_1->stop();
+    timer_1->stop();
     movingUp_1 = false;
     movingDown_1 = false;
     leftRotate_1 = false;
-    rightRotate_1 = false;}
+    rightRotate_1 = false;
+    }
     if(tankStatus_2 == false){
-
     timer_2->stop();
     movingUp_2 = false;
     movingDown_2 = false;
@@ -105,28 +106,44 @@ void gameScene::keyPressEvent(QKeyEvent *event)
 void gameScene::keyReleaseEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_W) {
+        tankStatus_1 = false;
+        stopMoving();
         movingUp_1 = false;
     }
     else if (event->key() == Qt::Key_S) {
+        tankStatus_1 = false;
+        stopMoving();
         movingDown_1 = false;
     }
     else if (event->key() == Qt::Key_A){
+        tankStatus_1 = false;
+        stopMoving();
         leftRotate_1 = false;
     }
     else if (event->key() == Qt::Key_D){
+        tankStatus_1 = false;
+        stopMoving();
         rightRotate_1 = false;
     }
     else if (event->key() == Qt::Key_I) {
+        tankStatus_2 = false;
+        stopMoving();
         movingUp_2 = false;
     }
     else if (event->key() == Qt::Key_K) {
         movingDown_2 = false;
+        tankStatus_2 = false;
+        stopMoving();
     }
     else if (event->key() == Qt::Key_J){
         leftRotate_2 = false;
+        tankStatus_2 = false;
+        stopMoving();
     }
     else if (event->key() == Qt::Key_L){
         rightRotate_2 = false;
+        tankStatus_2 = false;
+        stopMoving();
     }
 
 }
@@ -148,6 +165,7 @@ void gameScene::shoot(int x)
 
     connect(bulletTimer, &QTimer::timeout, this, [=]() {
         moveBullet(bullet,radians);
+        checkBulletTankCollision(bullet);
         if (++(*count) >= 500) {
             int index = bullets.indexOf(bullet);
             if (index != -1) {
@@ -171,8 +189,31 @@ void gameScene::shoot(int x)
     bulletTimer->start();
 }
 
+void gameScene::checkBulletTankCollision(bulletItem* bullet)
+{
+    QMessageBox msg;
+    if(bullet -> collidesWithItem(tank_1))
+    {
+
+    msg.setWindowTitle("坦克动荡");
+    msg.setIcon(QMessageBox::Information);
+    msg.setText("恭喜玩家2胜利！");
+    msg.setStandardButtons(QMessageBox::Yes);
+    msg.exec();
+    }
+    else if (bullet -> collidesWithItem(tank_2))
+    {
+    msg.setWindowTitle("坦克动荡");
+    msg.setIcon(QMessageBox::Information);
+    msg.setText("恭喜玩家1胜利！");
+    msg.setStandardButtons(QMessageBox::Yes);
+    msg.exec();
+    }
+}
+
 bulletItem* gameScene::initBullet(int x)
 {
+    int stepSize = 70;
     tankItem * tank;
     if(x==1)tank = tank_1;
     else tank = tank_2;
@@ -181,7 +222,11 @@ bulletItem* gameScene::initBullet(int x)
     bulletItem *bullet;
     bullet = new bulletItem;
     addItem(bullet);
-    bullet -> setPos(currentPosition.x(),currentPosition.y());
+    qreal tankAngle = tank->rotation();
+    qreal radians = qDegreesToRadians(tankAngle);
+    qreal dx = stepSize * qSin(radians);
+    qreal dy = -stepSize * qCos(radians);
+    bullet -> setPos(currentPosition.x()+dx,currentPosition.y()+dy);
     return bullet;
 }
 
