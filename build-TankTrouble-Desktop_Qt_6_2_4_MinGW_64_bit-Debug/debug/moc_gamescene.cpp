@@ -24,24 +24,25 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_gameScene_t {
-    const uint offsetsAndSize[14];
-    char stringdata0[58];
+    const uint offsetsAndSize[16];
+    char stringdata0[71];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_gameScene_t, stringdata0) + ofs), len 
 static const qt_meta_stringdata_gameScene_t qt_meta_stringdata_gameScene = {
     {
 QT_MOC_LITERAL(0, 9), // "gameScene"
-QT_MOC_LITERAL(10, 8), // "moveTank"
-QT_MOC_LITERAL(19, 0), // ""
-QT_MOC_LITERAL(20, 10), // "moveBullet"
-QT_MOC_LITERAL(31, 11), // "bulletItem*"
-QT_MOC_LITERAL(43, 6), // "bullet"
-QT_MOC_LITERAL(50, 7) // "radians"
+QT_MOC_LITERAL(10, 10), // "moveTank_1"
+QT_MOC_LITERAL(21, 0), // ""
+QT_MOC_LITERAL(22, 10), // "moveTank_2"
+QT_MOC_LITERAL(33, 10), // "moveBullet"
+QT_MOC_LITERAL(44, 11), // "bulletItem*"
+QT_MOC_LITERAL(56, 6), // "bullet"
+QT_MOC_LITERAL(63, 7) // "radians"
 
     },
-    "gameScene\0moveTank\0\0moveBullet\0"
-    "bulletItem*\0bullet\0radians"
+    "gameScene\0moveTank_1\0\0moveTank_2\0"
+    "moveBullet\0bulletItem*\0bullet\0radians"
 };
 #undef QT_MOC_LITERAL
 
@@ -51,7 +52,7 @@ static const uint qt_meta_data_gameScene[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -59,12 +60,14 @@ static const uint qt_meta_data_gameScene[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   26,    2, 0x0a,    1 /* Public */,
-       3,    2,   27,    2, 0x0a,    2 /* Public */,
+       1,    0,   32,    2, 0x0a,    1 /* Public */,
+       3,    0,   33,    2, 0x0a,    2 /* Public */,
+       4,    2,   34,    2, 0x0a,    3 /* Public */,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 4, QMetaType::QReal,    5,    6,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 5, QMetaType::QReal,    6,    7,
 
        0        // eod
 };
@@ -75,8 +78,9 @@ void gameScene::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         auto *_t = static_cast<gameScene *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->moveTank(); break;
-        case 1: _t->moveBullet((*reinterpret_cast< std::add_pointer_t<bulletItem*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<qreal>>(_a[2]))); break;
+        case 0: _t->moveTank_1(); break;
+        case 1: _t->moveTank_2(); break;
+        case 2: _t->moveBullet((*reinterpret_cast< std::add_pointer_t<bulletItem*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<qreal>>(_a[2]))); break;
         default: ;
         }
     }
@@ -90,7 +94,7 @@ const QMetaObject gameScene::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_gameScene_t
 , QtPrivate::TypeAndForceComplete<gameScene, std::true_type>
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bulletItem *, std::false_type>, QtPrivate::TypeAndForceComplete<qreal, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<bulletItem *, std::false_type>, QtPrivate::TypeAndForceComplete<qreal, std::false_type>
 
 
 >,
@@ -117,13 +121,13 @@ int gameScene::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 3)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }
