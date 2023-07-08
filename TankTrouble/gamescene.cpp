@@ -200,6 +200,8 @@ void gameScene::checkBulletTankCollision(bulletItem* bullet)
     msg.setText("恭喜玩家2胜利！");
     msg.setStandardButtons(QMessageBox::Yes);
     msg.exec();
+    timer_1 -> stop();
+    timer_2 -> stop();
     }
     else if (bullet -> collidesWithItem(tank_2))
     {
@@ -208,6 +210,8 @@ void gameScene::checkBulletTankCollision(bulletItem* bullet)
     msg.setText("恭喜玩家1胜利！");
     msg.setStandardButtons(QMessageBox::Yes);
     msg.exec();
+    timer_1 -> stop();
+    timer_2 -> stop();
     }
 }
 
